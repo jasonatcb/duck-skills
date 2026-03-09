@@ -64,6 +64,3 @@ duck-skills/
         └── example.md      # 轉換前後範例
 ```
 
-## 授權
-
-MIT
