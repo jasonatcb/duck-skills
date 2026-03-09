@@ -1,0 +1,8 @@
+
+# AI Agent
+.opencode/
+
+# OS Generated FIles
+*.DS_Store
+Thumbs.db
+
