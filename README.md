@@ -35,15 +35,15 @@
 
 openskills 是 2026 年最通用的技能管理工具，支援所有基於 $SKILL.md$ 規範的 AI 代理（如 Claude Code, Cursor, OpenCode）。
 
-從 GitHub 安裝技能
 
 ``` bash
+# 從 GitHub 安裝技能
 npx openskills install jasonatcb/duck-skills
 ```
 
-同步至 AGENTS.md (讓 AI 能夠偵測到新技能)
 
 ```bash
+# 同步至 AGENTS.md (讓 AI 能夠偵測到新技能)
 npx openskills sync
 ```
 
