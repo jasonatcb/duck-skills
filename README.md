@@ -41,7 +41,7 @@ npx skills add jasonatcb/duck-skills
 ### 手動安裝
 
 ```bash
-# 克隆此仓库
+# 複製此倉庫
 git clone https://github.com/your-org/duck-skills.git ~/.config/opencode/skills/duck-skills
 ```
 
