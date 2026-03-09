@@ -40,7 +40,7 @@ openskills 是 2026 年最通用的技能管理工具，支援所有基於 $SKIL
 ``` bash
 npx openskills install jasonatcb/duck-skills
 ```
-```
+
 同步至 AGENTS.md (讓 AI 能夠偵測到新技能)
 
 ```bash
