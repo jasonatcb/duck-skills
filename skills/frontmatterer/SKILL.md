@@ -51,6 +51,10 @@ When invoked with a file path:
   - `intents` - Must be in the same language as `lang` (zh-TW docs = Chinese intents)
   - `features` - Should match document language
   - `tags` - Follow document language conventions
+- **Term Formatting**: Use underscores `_` instead of spaces for multi-word terms in `intents`, `features`, and `tags` (e.g., `LINE_OA`, `Google_Analytics`).
+- **modules**: Match the CYB admin console left sidebar menu items (e.g., "訂單", "商品", "會員")
+- **paths**: Use format "選單項目 > 子項目" (e.g., "訂單 > 訂單報表匯出")
+- **related** and **prerequisites**: Use Obsidian wikilink format with double quotes `"[[filename]]"` (e.g., `"[[設定網站安全性]]"`, `"[[POS 報表列表與功能說明]]"`)
 
 ## Example
 

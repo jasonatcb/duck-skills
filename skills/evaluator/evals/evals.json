@@ -1,0 +1,17 @@
+{
+  "skill_name": "doc-evaluator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "檢查 workspace/test-docs/測試QA.md 的品質",
+      "expected_output": "產出檢查報告，包含技術檢查和內容檢查結果",
+      "files": ["workspace/test-docs/測試QA.md"]
+    },
+    {
+      "id": 2,
+      "prompt": "對 docs/ec/orders/ 資料夾做 QA",
+      "expected_output": "對資料夾內所有 md 檔案產出檢查報告",
+      "files": []
+    }
+  ]
+}

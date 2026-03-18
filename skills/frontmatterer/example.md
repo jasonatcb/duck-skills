@@ -108,7 +108,7 @@ ui_components: []
 paths: []
 layouts: []
 wp_url: []
-permalink: /pos/setup-guide
+permalink:
 comments: false
 search:
   exclude: false
@@ -145,8 +145,12 @@ plans: ["進階", "高手", "企業"]
 cyb_extensions: ["STORE PAL"]
 intents: ["如何核銷票券", "票券核銷失敗怎麼辦"]
 features: ["票券掃碼核銷", "手動輸入核銷碼", "批次核銷"]
-prerequisites: ["/ec/e-ticket/設定電子票券", "/pos/get-started"]
-related: ["/ec/e-ticket/電子票券退款", "/pos/troubleshooting"]
+prerequisites:
+  - "[[設定電子票券]]"
+related:
+  - "[[設定網站安全性]]"
+  - "[[新增網站管理員並設定權限]]"
+  - "[[POS 報表列表與功能說明]]"
 tags: ["電子票券", "核銷", "POS", "STORE PAL"]
 acoiv: operation
 apis: ["/api/v1/tickets/verify", "/api/v1/tickets/redeem"]
@@ -155,7 +159,7 @@ ui_components: ["掃碼器", "核銷按鈕", "票券詳情彈窗"]
 paths: ["票券管理 > 核銷記錄", "POS > 核銷"]
 layouts: ["classic"]
 wp_url: ["https://www.cyberbiz.io/support/ticket-redemption"]
-permalink: /ec/e-ticket/核銷電子票券
+permalink:
 comments: true
 search:
   exclude: false

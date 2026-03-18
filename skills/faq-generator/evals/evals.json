@@ -1,0 +1,17 @@
+{
+  "skill_name": "faq-generator",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "為 workspace/test-docs/測試文件A.md 添加 FAQ",
+      "expected_output": "在文件末尾添加 ## 常見問題 區塊，包含 2-3 個基於文檔內容的 FAQ",
+      "files": ["workspace/test-docs/測試文件A.md"]
+    },
+    {
+      "id": 2,
+      "prompt": "為 workspace/test-docs/測試文件B.md 添加 FAQ",
+      "expected_output": "在現有的 ## 常見問題 區塊下方添加 FAQ",
+      "files": ["workspace/test-docs/測試文件B.md"]
+    }
+  ]
+}

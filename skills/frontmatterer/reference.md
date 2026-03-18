@@ -26,26 +26,26 @@ notes: { type: Array, desc: "Internal editor notes" }
 ga_views: { type: Integer, default: 0, desc: "GA4 total page views" }
 feedback: { type: Integer, default: 0, desc: "Net feedback score (Up minus Down) from zensical feedback widge" }
 products: { type: Array, enum: ["EC", "POS", "WMS"] }
-modules: { type: Array, desc: "Matching CYB admin console leftsidebar menu" }
+modules: { type: Array, desc: "Matching CYB admin console leftsidebar menu (e.g., 訂單, 商品, 會員)" }
 sites: { type: Array, enum: ["TW", "JP", "US"] }
 audiences: { type: Array, enum: ["admin", "developer", "clerk"] }
 difficulty: { type: String, enum: ["beginner", "intermediate", "advanced"] }
 tnb: { type: String, enum: ["trunk", "branch"] }
 plans: { type: Array, enum: ["專業", "進階", "高手", "專業 PLUS", "進階 PLUS", "高手 PLUS", "企業"] }
 cyb_extensions: { type: Array, default: ["APP MARKET", "AUTOMATION", "CHANNEL BRIDGE", "CHAT BOX", "EXPRESS", "NOW!", "STORE PAL", "TICKET"] }
-intents: { type: Array, desc: "Search intent/User goal" } 
-features: { type: Array, desc: "Specific system features mentioned" } 
-prerequisites: { type: Array, desc: "Required reading/tasks/documents" }
-related: { type: Array, desc: "Related documents" }
+intents: { type: Array, desc: "Search intent/User goal in document's language" } 
+features: { type: Array, desc: "Specific system features mentioned in document's language" } 
+prerequisites: { type: Array, desc: "Required reading/tasks/documents (Obsidian wikilink format, e.g., \"[[設定電子票券]]\")" }
+related: { type: Array, desc: "Related documents (Obsidian wikilink format, e.g., \"[[管理者權限與後台選單對應表]]\")" }
 tags: { type: Array, desc: "SEO internal keywords" }
 acoiv: { type: String, enum: ["activate", "configure", "operation", "integration", "venture"] }
 apis: { type: Array, desc: "List of API endpoints" }
 devices: { type: Array, enum: ["desktop", "mobile", "tablet"] }
 ui_components: { type: Array, desc: "UI elements mentioned" }
-paths: { type: Array, desc: "admin console navigation routes mentioned" }
+paths: { type: Array, desc: "admin console navigation routes (e.g., 訂單 > 訂單報表匯出)" }
 layouts: { type: Array, enum: ["classic", "draggable"] }
 wp_url: { type: Array, desc: WordPress docs urls } 
-permalink: { type: String, desc: "Slug for Zensical URL" }
+permalink: { type: String, desc: "Slug for Zensical URL - leave empty until document is migrated to Zensical" }
 comments: { type: Boolean, default: false }
 search:
   exclude: { type: Boolean, default: false }
@@ -64,7 +64,7 @@ hide: { type: Array, enum: ["navigation", "toc", "feedback"] desc: "Visual eleme
 | `created`       | Date/Time| ✅           | **建立日期**：文件最初產生的時間。由核心模板於建立時填入，後續**不應更改**。|
 | `last_modified` | Date     | ✅            | **最後更新**：格式必須為 `YYYY-MM-DD HH:mm`。                 |
 | `lang`          | Enum     | ✅            | **語系**：`zh-TW`, `en-US`, `ja-JP`。            |
-| `permalink`     | String   | ✅            | **固定連結**：Zensical 產出的 URL Slug。              |
+| `permalink`     | String   | ❌            | **固定連結**：文件搬遷至 Zensical 上架後才會產生，**目前請留空**。              |
 
 ### 2. 文件生產流程 (DDLC)
 
@@ -89,7 +89,7 @@ hide: { type: Array, enum: ["navigation", "toc", "feedback"] desc: "Visual eleme
 |**Key**|**Type**|**Description**|
 |---|---|---|
 |`products`|Array|產品線：`EC`, `POS`, `WMS`。|
-|`modules`|Array|功能模組：須對照 **CYB 後台左側選單** 名稱。|
+|`modules`|Array|功能模組：須對照 **CYB 後台左側選單** 名稱（如：`訂單`、`商品`、`會員`、`分潤`）。|
 |`sites`|Array|適用站點：`TW`, `JP`, `US`。|
 |`tnb`|Enum|`trunk` (全方案適用) 或 `branch` (特定方案)。|
 |`plans`|Array|**方案限制**：`專業`, `進階`, `高手`, `專業 PLUS`, `進階 PLUS`, `高手 PLUS`, `企業`。|
@@ -120,7 +120,7 @@ hide: { type: Array, enum: ["navigation", "toc", "feedback"] desc: "Visual eleme
 |`apis`|Array|文件中調用的 **API Endpoints** 列表。|
 |`devices`|Array|適用設備：`desktop`, `mobile`, `tablet`。|
 |`ui_components`|Array|文中提到的介面元素名稱。|
-|`paths`|Array|**後台路徑**：文中提到的後台介面操作路徑。|
+|`paths`|Array|**後台路徑**：文中提到的後台介面操作路徑，格式為「選單項目 > 子項目」（如：`訂單 > 訂單報表匯出`）。|
 |`layouts`|Enum|頁面佈局：`classic` (一般版型), `draggable`（拖拉版型）。|
 
 ### 8. 外部整合與系統 (Zensical / WP)
@@ -131,4 +131,11 @@ hide: { type: Array, enum: ["navigation", "toc", "feedback"] desc: "Visual eleme
 |`comments`|Boolean|`false`|是否開啟頁面評論功能。|
 |`search.exclude`|Boolean|`false`|是否從搜尋結果中排除此頁。|
 |`icon`|String|-|**Lucide 圖示**：格式如 `lucide/braces` 或 `lucide/book`。|
-|hide|Array|-|隱藏頁面元素：可選擇 `navigation` (左側選單) 或 `toc` (右側大綱) `feedback（回饋工具）`。|
+### 9. 格式規範 (Formatting Guidelines)
+
+- **英文術語空格處理**：在 `intents`, `features`, `tags` 等欄位中，若英文術語包含空格，應以底線 `_` 取代空格（例如：`LINE OA` 應寫為 `LINE_OA`, `Google Analytics` 應寫為 `Google_Analytics`）。這有助於搜尋引擎精準匹配與系統內部處理。
+- **日期格式**：嚴格遵守 `YYYY-MM-DD HH:mm`。
+- **陣列語法**：即使只有一個項目，也建議使用條列式或 `[]` 語法。
+- **paths 格式**：使用「選單項目 > 子項目」格式（例如：`訂單 > 訂單報表匯出`、`會員 > 會員列表`）。
+- **modules 格式**：對照 CYB 後台左側選單名稱（例如：`訂單`、`商品`、`會員`、`分潤`）。
+- **related / prerequisites 路徑**：使用 Obsidian wikilink 格式並加上雙引號（例如：`"[[管理者權限與後台選單對應表]]"`、`"[[POS 報表列表與功能說明]]"`）。
