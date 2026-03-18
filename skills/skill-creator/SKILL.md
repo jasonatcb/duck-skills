@@ -1,6 +1,8 @@
 ---
 name: skill-creator
 description: Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.
+version: "1.0.0"
+last_updated: 2026-03-18
 ---
 
 # Skill Creator
@@ -65,8 +67,51 @@ Based on the user interview, fill in these components:
 
 - **name**: Skill identifier
 - **description**: When to trigger, what it does. This is the primary triggering mechanism - include both what the skill does AND specific contexts for when to use it. All "when to use" info goes here, not in the body. Note: currently Claude has a tendency to "undertrigger" skills -- to not use them when they'd be useful. To combat this, please make the skill descriptions a little bit "pushy". So for instance, instead of "How to build a simple fast dashboard to display internal Anthropic data.", you might write "How to build a simple fast dashboard to display internal Anthropic data. Make sure to use this skill whenever the user mentions dashboards, data visualization, internal metrics, or wants to display any kind of company data, even if they don't explicitly ask for a 'dashboard.'"
+- **version**: Initial version (e.g., "1.0.0")
+- **last_updated**: Creation date (YYYY-MM-DD)
 - **compatibility**: Required tools, dependencies (optional, rarely needed)
 - **the rest of the skill :)**
+
+### Always create log.md
+
+When creating a new skill, you MUST also create a `log.md` file:
+
+```
+skill-name/
+├── SKILL.md (required)
+│   ├── YAML frontmatter (name, description, version, last_updated required)
+│   └── Markdown instructions
+└── log.md (required)    # Change log for version tracking
+    └── Bundled Resources (optional)
+        ├── scripts/    - Executable code for deterministic/repetitive tasks
+        ├── references/ - Docs loaded into context as needed
+        └── assets/     - Files used in output (templates, icons, fonts)
+```
+
+The `log.md` should use this template:
+
+```markdown
+# Change Log: [Skill Name]
+
+All notable changes to this skill will be documented in this file.
+
+| Date | Version | Type | Change Description | Impact/Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| YYYY-MM-DD | 1.0.0 | Init | 初始技能建立。 | 建立基線。 |
+
+> **Note:** Versions follow [Semantic Versioning](https://semver.org/): 
+> **Major** (breaking changes), **Minor** (new features), **Patch** (bug fixes).
+
+## 版本類型說明
+- **Init**: 初始版本
+- **Fix**: 錯誤修正
+- **Feature**: 新功能
+- **Breaking**: 破壞性變更
+```
+
+When modifying a skill, you MUST:
+1. Increment the version in `SKILL.md` frontmatter (follow semver)
+2. Append a new entry to `log.md` with the change details**
 
 ### Skill Writing Guide
 

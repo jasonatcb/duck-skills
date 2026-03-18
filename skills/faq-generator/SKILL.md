@@ -1,6 +1,8 @@
 ---
 name: faq-generator
 description: 為文件新增常見問題 (FAQ) 區塊。當用戶說「為某個文檔添加 FAQ」、「在文件中加入常見問題」、「生成 FAQ」或類似意圖時觸發此技能。使用方式：提供文檔路徑（如 docpath.md），技能會分析文檔內容，生成 2-3 個與主題相關的常見問題，並使用 zensical quote callout 格式添加到 ## 常見問題區塊中。
+version: "1.0.0"
+last_updated: 2026-03-18
 ---
 
 # FAQ 生成技能

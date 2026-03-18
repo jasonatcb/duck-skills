@@ -1,6 +1,8 @@
 ---
 name: frontmatterer
 description: Update document frontmatter to match the zensical-zh-tw schema reference
+version: "1.0.0"
+last_updated: 2026-03-18
 license: MIT
 compatibility: opencode
 metadata:
