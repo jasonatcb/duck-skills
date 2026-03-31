@@ -1,7 +1,7 @@
 ---
 name: evaluator
 description: 文件品質檢查 (Doc QA)。當用戶說「檢查文件品質」、「文件 QA」、「審查文件」、「評估文檔」、「檢視文檔完整性」或類似意圖時觸發。使用方式：用戶提供文件路徑（單一檔案、資料夾或多個檔案），技能會進行技術檢查（frontmatter、連結、格式）和內容檢查（完整性、清晰度），並產出檢查報告及評分。
-version: "1.0.1"
+version: "1.0.4"
 last_updated: 2026-03-18
 ---
 
@@ -9,7 +9,9 @@ last_updated: 2026-03-18
 
 此技能會對文件進行品質檢查，包含技術層面和內容層面的審查，並給予 0-100 的評分。
 
-**注意：** Frontmatter 欄位檢查請參考 `frontmatterer` 技能的 `reference.md` 檔案。
+**注意：** 
+- Frontmatter 欄位檢查請參考 `frontmatterer` 技能的 `reference.md` 檔案。
+- 發現 frontmatter 問題時，可主動使用 `frontmatterer` 技能自動修正。相關欄位包括：prerequisites、related、intents、features、tags 等。
 
 ## 使用方式
 
@@ -71,7 +73,12 @@ last_updated: 2026-03-18
 - [ ] H2 使用 `##` 標題
 - [ ] H3 使用 `###` 標題
 - [ ] 首圖使用 `.hero-page` class（如有使用）
+- [ ] Subtitle 設定：若 frontmatter 有 description，則 `{ .subtitle }` 前需有一行純文字內容（與 description 相同）
 - [ ] 注意：「常見問題」區塊使用 `??? quote` 格式
+
+**自動修正規則：**
+- 若 `description` 有值但 `{ .subtitle }` 前無文字：自動提取 description 值並填入
+- 格式：將 description 值（不含引號）置於 `{ .subtitle }` 之前一行
 
 **圖片樣式說明：**
 - `.hero-page`：用於文件首圖（英雄圖），已在全局 CSS 中自動處理樣式

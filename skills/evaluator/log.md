@@ -4,8 +4,8 @@ All notable changes to this skill will be documented in this file.
 
 | Date | Version | Type | Change Description | Impact/Notes |
 | :--- | :--- | :--- | :--- | :--- |
-| 2026-03-17 | 1.0.0 | Init | 初始技能建立與測試。 | 建立基線。 |
-| 2026-03-18 | 1.0.1 | Fix | 更新圖片格式檢查邏輯，`.hero-page` 為首圖樣式，由全局 CSS 自動處理。 | 避免誤報圖片缺少 .screenshot class。 |
+| 2026-03-26 | 1.0.5 | Fix | QA 檢查並修正 GMC 文件：移除重複的 `---` 分隔符號，驗證 related wikilinks 指向的檔案存在。 | 確保文件格式正確。 |
+| 2026-03-18 | 1.0.4 | Feature | 新增 subtitle 自動修正：若 description 有值但 { .subtitle } 前無文字，自動提取 description 填入。 | 確保 subtitle 與 description 一致。 |
 
 > **Note:** Versions follow [Semantic Versioning](https://semver.org/): 
 > **Major** (breaking changes), **Minor** (new features), **Patch** (bug fixes).
