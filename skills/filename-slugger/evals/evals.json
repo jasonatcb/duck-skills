@@ -1,0 +1,38 @@
+{
+  "skill_name": "filename-slugger",
+  "evals": [
+    {
+      "id": 1,
+      "name": "rename-ec-order-flow",
+      "prompt": "Rename the file docs/ec/orders/訂單出貨流程.md to a proper English kebab-case filename. This file has cross-references in at least 5 other files and in zensical.toml. Use check first to preview, then rename.",
+      "expected_output": "File renamed to order-shipping-flow.md. All wikilinks [[訂單出貨流程]] updated to [[order-shipping-flow]]. All markdown links ](訂單出貨流程.md) updated to ](order-shipping-flow.md). zensical.toml nav path updated. Frontmatter permalink updated.",
+      "files": [
+        "docs/ec/orders/訂單出貨流程.md",
+        "docs/ec/orders/index.md",
+        "docs/ec/orders/search-filter-orders.md",
+        "docs/ec/orders/revert-to-unshipped.md",
+        "docs/ec/orders/shipping-detail-print.md",
+        "docs/resources/glossary.md",
+        "zensical.toml",
+        "zensical.en.toml"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "rename-pos-auto-close",
+      "prompt": "Rename docs/pos/orders/設定 POS 訂單自動結案.md to pos-auto-close.md. This file is in the POS section. Use check first to preview, then rename.",
+      "expected_output": "File renamed to pos-auto-close.md. zensical.toml nav path updated. Frontmatter permalink updated. No wikilink references found.",
+      "files": [
+        "docs/pos/orders/設定 POS 訂單自動結案.md",
+        "zensical.toml"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "scan-chinese-files",
+      "prompt": "Show me all the Chinese-named files in the docs/ec/orders/ directory and tell me which ones need their permalink fixed.",
+      "expected_output": "List of Chinese-named .md files in docs/ec/orders/ with permalink status marked (✅ or ⚠️ no permalink).",
+      "files": []
+    }
+  ]
+}

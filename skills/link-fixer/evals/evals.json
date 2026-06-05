@@ -1,0 +1,41 @@
+{
+  "skill_name": "link-fixer",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Fix the links in 參考資料 in docs/ec/orders/使用超商大宗寄倉（B2C）出貨.md — the paths are wrong and they use { data-preview } that should be removed and replaced with title attribute",
+      "expected_output": "All 3 links in the 參考資料 section updated with correct Chinese-named file paths and { title=\"...\" } attributes derived from the target page frontmatter",
+      "files": ["docs/ec/orders/使用超商大宗寄倉（B2C）出貨.md"],
+      "expectations": [
+        "The link targets no longer use English-slug filenames (cvs-b2c-logistics-centers, cvs-b2c-channels, cvs-b2c-plans)",
+        "Each link target file exists on disk and uses the correct Chinese filename",
+        "No remaining { data-preview } instances in the 參考資料 section",
+        "Each link has a { title=\"...\" } attribute containing the target page's frontmatter title",
+        "The last_modified frontmatter field is updated"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Check docs/ec/orders/使用超商大宗寄倉（B2C）出貨.md for broken links and fix them — the 參考資料 section has links that don't work",
+      "expected_output": "All non-functional links in the document identified and fixed with correct paths",
+      "files": ["docs/ec/orders/使用超商大宗寄倉（B2C）出貨.md"],
+      "expectations": [
+        "All broken links are detected and reported to the user",
+        "Each broken link path is corrected to point to an existing file",
+        "No { data-preview } remains on fixed links"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Fix links in 使用超商大宗寄倉（B2C）出貨.md — the 參考資料 links reference files that don't exist, and remove the data preview attribute, replacing it with proper title",
+      "expected_output": "All issues in the 參考資料 section resolved — wrong paths corrected, data-preview replaced with title",
+      "files": ["docs/ec/orders/使用超商大宗寄倉（B2C）出貨.md"],
+      "expectations": [
+        "The skill correctly identifies that cvs-b2c-logistics-centers.md maps to 超商大宗寄倉 B2C 物流中心對照.md",
+        "The skill correctly identifies that cvs-b2c-channels.md maps to 超商大宗寄倉 B2C 通路規格對照.md",
+        "The skill correctly identifies that cvs-b2c-plans.md maps to 超商大宗寄倉 B2C 方案與計費對照.md",
+        "All three links are updated with both correct paths and title attributes"
+      ]
+    }
+  ]
+}

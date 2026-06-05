@@ -1,0 +1,23 @@
+{
+  "skill_name": "grid-master",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我想建立 grid cards，樣式是輕量導航，放置在全站共同設定章節。項目有：導覽列、頁腳、彈窗廣告、顏色與圖示設定。",
+      "expected_output": "4 個輕量導航樣式的 grid cards，每個有 :lucide- icon 和 { .ig .middle }，標題使用 [__標題__](#錨點){ data-preview } 格式",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "我要建立後續操作 grid cards，放置在文件末尾。項目：1. LINE 加入好友工具 - 引導商家加入 LINE 官方帳號好友，相關文件是「設定拖拉版型網站的 LINE 加入好友工具.md」 2. 物流限制 - 設定商品的配送物流條件，相關文件是「設定超商配送限制與物流排除.md」",
+      "expected_output": "2 個後續操作樣式的 grid cards，每個有 :lucide- icon 和 { .lg }，包含標題、說明文字和文件連結加 { data-preview }",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "將以下功能說明轉換為功能說明樣式的 grid cards：\n- GMC 帳號設定：進入 Google Merchant Center 完成商家基本資訊設定，並確認商店所有權完成驗證，相關文件：「設定 Google Merchant Center 並同步 CYBERBIZ 商品.md」\n- GA4 串接：在 Google Analytics 後台取得評估 ID，前往 CYBERBIZ 後台填入評估 ID 完成串接，相關文件：「建立並串接 Google Analytics.md」",
+      "expected_output": "2 個功能說明樣式的 grid cards，每個有 :lucide- icon 和 { .lg .middle }，包含 --- 分隔線、描述文字和 [:lucide-arrow-right: 連結",
+      "files": []
+    }
+  ]
+}

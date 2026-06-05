@@ -54,19 +54,48 @@ last_updated: 2026-03-18
 - [ ] `tags` 欄位（SEO 關鍵字）
 - [ ] `wp_url` 欄位（對應 WordPress 原始文件網址）
 - [ ] `audiences` 欄位
-- [ ] `difficulty` 欄位
+- [ ] `difficulty` 欄位（值：beginner, intermediate, advanced）
 
 #### 2.2 連結檢查
 - [ ] 內部連結指向的檔案是否存在
 - [ ] 連結路徑是否正確（相對路徑）
 - [ ] `{ data-preview }` 語法使用正確（如有使用）
-- [ ] `related` 和 `prerequisites` 欄位使用 Obsidian wikilink 格式 `"[[filename]]"`（如 `"[[設定 LINE 快速登入]]"`）
+- [ ] `related` 和 `prerequisites` 欄位檢查：
+  - **若引用已存在的檔案**：使用 Obsidian wikilink 格式 `"[[filename]]"`（如 `"[[設定 LINE 快速登入]]"`）
+  - **若無對應文件**：使用純字串格式（如 `- 需先完成 Google Ads 帳號註冊`）
 
 **Obsidian wikilink 格式說明：**
 - 格式：`"[[filename]]"` 或 `"[[path/to/filename]]"`
-- 檢查連結是否存在時，需提取 wikilink 中的文件名稱（不含 `.md` 副檔名）
+- 檢查連結是否存在時，需提取 wikilink 中的檔案名稱（不含 `.md` 副檔名）
 - 在專案的 `docs/` 目錄中搜尋對應的 `.md` 檔案
 - 例如：`"[[設定 LINE 快速登入]]"` 對應 `docs/ec/integrations/line/account-integration/設定 LINE 快速登入.md`
+
+**Wikilink Anchor 檢查（重要）：**
+- 格式：`"[[filename#heading]]"` 或 `"[[filename#anchor-id]]"`
+- 檢查時需驗證兩件事：
+  1. 檔案是否存在（不含 `#` 的部分）
+  2. Anchor 是否存在於目標檔案中
+- Anchor 存在的兩種形式：
+  - Markdown 標題：`## 標題文字` → anchor 為 `標題文字`（需轉小寫、空格轉 `-`）
+  - 自定義 anchor：`{ #anchor-id }` 或 `{ #order-history }` → anchor 為 `anchor-id`
+- **常見錯誤**：使用標題文字而非正確的 anchor ID（如 `#訂單操作紀錄` 應改為 `#order-history`）
+- **此語法為有效語法，檢查時應標記為通過，但需驗證 anchor 是否存在**
+
+**Autoref 交叉引用語法（有效）：**
+- 格式：`[顯示文字][參考標籤]{ data-preview }` 或 `[參考標籤]{ data-preview }`
+- 此語法由 mkdocs-autorefs 插件自動解析，根據標題文字建立交叉引用
+- 參考標籤通常是標題文字（如 `## 搭配折扣碼` 對應 `[搭配折扣碼]`）
+- **空參考標籤語法 `[][]` 亦為有效**：當使用 `[__標題__][]` 時，表示使用標題文字作為參考標籤（autoref 自動對應）
+- **同文件標題引用 `[#heading]` 亦為有效**：用於引用同一文件中的標題（如 `[#美安訂單]`）
+- **此語法為有效語法，檢查時應標記為通過，無需視為錯誤**
+
+**Material/Simple 圖示作為 Lucide 替代方案：**
+- 當 Lucide 圖示庫中沒有合適的圖示時，可以使用 Material Design Icons 或 Simple Icons 作為替代
+- 語法：
+  - Material：` :material-<icon-name>:`（如 `:material-point-of-sale:` 用於 POS 銷售點）
+  - Simple：` :simple-<icon-name>:`（如 `:simple-stryker:` 用於美安 Shop.com/Stryker）
+- **注意**：此用法為有效語法，檢查時應標記為通過，不應視為格式錯誤
+- **優先順序**：優先使用 Lucide → 其次 Material → 最後 Simple Icons
 
 #### 2.3 格式檢查
 - [ ] 只有一個 H1（# title）
@@ -74,7 +103,7 @@ last_updated: 2026-03-18
 - [ ] H3 使用 `###` 標題
 - [ ] 首圖使用 `.hero-page` class（如有使用）
 - [ ] Subtitle 設定：若 frontmatter 有 description，則 `{ .subtitle }` 前需有一行純文字內容（與 description 相同）
-- [ ] 注意：「常見問題」區塊使用 `??? quote` 格式
+- [ ] 注意：「常見問題」區塊使用 `??? quote` 格式，內部使用 `[](){ #slug }` 錨點語法
 
 **自動修正規則：**
 - 若 `description` 有值但 `{ .subtitle }` 前無文字：自動提取 description 值並填入
@@ -105,8 +134,14 @@ last_updated: 2026-03-18
 
 #### 3.3 FAQ 檢查（如有 `## 常見問題` 區塊）
 - [ ] 使用 `??? quote` 格式
+- [ ] 每個 FAQ 內部使用 `[](){ #slug }` 錨點語法
 - [ ] 問題與文件主題相關
 - [ ] 答案簡潔明瞭
+- [ ] 答案中提及的專有名詞或操作，若有對應文件，應加入 `data-preview` 連結（如：`[儲值](建立 Meta 廣告帳號並儲值.md#儲值廣告金){ data-preview }`）
+
+#### 3.4 後續操作 Grid Cards 檢查（如有 `## 後續操作` 區塊）
+- [ ] 每張卡片連結至不同文件，避免同一文件被連結兩次
+- [ ] 連結路徑正確且使用 `{ data-preview }` 屬性
 
 ### 4. 技術寫作標準檢查 (Technical Writing Standards)
 

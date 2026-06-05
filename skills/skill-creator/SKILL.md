@@ -1,8 +1,8 @@
 ---
 name: skill-creator
 description: Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.
-version: "1.0.0"
-last_updated: 2026-03-18
+version: "1.1.0"
+last_updated: 2026-06-03
 ---
 
 # Skill Creator
@@ -81,11 +81,13 @@ skill-name/
 ├── SKILL.md (required)
 │   ├── YAML frontmatter (name, description, version, last_updated required)
 │   └── Markdown instructions
-└── log.md (required)    # Change log for version tracking
-    └── Bundled Resources (optional)
-        ├── scripts/    - Executable code for deterministic/repetitive tasks
-        ├── references/ - Docs loaded into context as needed
-        └── assets/     - Files used in output (templates, icons, fonts)
+├── log.md (required)           # Change log for version tracking
+├── man/ (recommended)
+│   └── <skill-name>.1          # Man page in troff format (see below)
+└── Bundled Resources (optional)
+    ├── scripts/    - Executable code for deterministic/repetitive tasks
+    ├── references/ - Docs loaded into context as needed
+    └── assets/     - Files used in output (templates, icons, fonts)
 ```
 
 The `log.md` should use this template:
@@ -113,6 +115,47 @@ When modifying a skill, you MUST:
 1. Increment the version in `SKILL.md` frontmatter (follow semver)
 2. Append a new entry to `log.md` with the change details**
 
+### Always create a man page
+
+When creating a new skill, you MUST also create a man page at `man/<skill-name>.1` in troff format using the `man` macro package. This allows users to view documentation with `man <skill-name>`.
+
+Use this template:
+
+```troff
+.TH SKILL-NAME 1 "YYYY-MM-DD" "1.0.0" "Zensical Documentation Skills"
+.SH NAME
+skill-name \- one-line description of the skill
+.SH SYNOPSIS
+.B <skill triggers when user says>
+...
+.SH DESCRIPTION
+.B skill-name
+is a skill that [what the skill does].
+...
+.SH EXAMPLES
+.TP
+.B Example 1:
+User says something
+.TP
+.B Example 2:
+User says something else
+.SH FILES
+.TP
+.I ~/.config/opencode/skills/<skill-name>/SKILL.md
+The skill definition (fallback if man page is unavailable).
+.SH NOTES
+.PP
+Man pages follow the same convention as all Zensical documentation skills.
+Each skill stores its man page at
+.IR <skill-path>/man/<skill-name>.1 .
+```
+
+The date should match the skill's creation date (use today's date). The version should match SKILL.md's frontmatter version.
+
+You can reference existing man pages for style guidance:
+- `~/.config/opencode/skills/glossary-sync/man/glossary-sync.1`
+- `~/.config/opencode/skills/man-skill/man/man.1`
+
 ### Skill Writing Guide
 
 #### Anatomy of a Skill
@@ -122,6 +165,9 @@ skill-name/
 ├── SKILL.md (required)
 │   ├── YAML frontmatter (name, description required)
 │   └── Markdown instructions
+├── log.md (required)         # Change log for version tracking
+├── man/ (recommended)
+│   └── <skill-name>.1        # Man page in troff format
 └── Bundled Resources (optional)
     ├── scripts/    - Executable code for deterministic/repetitive tasks
     ├── references/ - Docs loaded into context as needed

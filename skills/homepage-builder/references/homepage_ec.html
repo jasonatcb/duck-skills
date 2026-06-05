@@ -1,0 +1,676 @@
+{% extends "main.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --on-secondary-fixed-variant: #005321;
+      --tertiary: #35445a;
+      --on-secondary: #ffffff;
+      --on-surface-variant: #434654;
+      --primary-fixed: #dae2ff;
+      --on-primary: #ffffff;
+      --surface-container-high: #e6e8ea;
+      --on-primary-fixed-variant: #0040a2;
+      --primary-container: #0052cc;
+      --secondary: #006e2f;
+      --on-surface: #191c1e;
+      --error-container: #ffdad6;
+      --secondary-fixed: #6bff8f;
+      --on-secondary-container: #007432;
+      --outline: #737685;
+      --surface-container-low: #f2f4f6;
+      --error: #ba1a1a;
+      --surface-variant: #e0e3e5;
+      --surface-container-lowest: #ffffff;
+      --surface-container: #eceef0;
+      --primary-fixed-dim: #b2c5ff;
+      --outline-variant: #c3c6d6;
+      --on-error: #ffffff;
+      --primary: #003d9b;
+      --surface: #f7f9fb;
+      --on-background: #191c1e;
+      --inverse-surface: #2d3133;
+      --inverse-on-surface: #eff1f3;
+      --background: #f7f9fb;
+      --inverse-primary: #b2c5ff;
+      --secondary-container: #6bff8f;
+      --mx: 1280px;
+      --px: 32px;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    }
+    .card-shadow {
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .md-content {
+      padding-top: 0;
+    }
+    .ec-sect {
+      padding-left: var(--px);
+      padding-right: var(--px);
+    }
+    .ec-hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.75rem;
+      background: var(--primary-container);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px;
+      min-height: 300px;
+    }
+    .ec-hero h1 {
+      font-size: 40px;
+      line-height: 52px;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 16px 0;
+    }
+    .ec-hero p {
+      font-size: 18px;
+      line-height: 28px;
+      color: var(--primary-fixed);
+      margin: 0 0 32px 0;
+      max-width: 36rem;
+    }
+    .ec-hero-actions { display: flex; flex-wrap: wrap; gap: 16px; }
+    .ec-hero-actions button {
+      padding: 12px 32px;
+      border-radius: 0.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      font-size: 14px;
+    }
+    .ec-hero-actions .btn-primary {
+      background: #fff;
+      color: var(--primary);
+    }
+    .ec-hero-actions .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.4);
+      backdrop-filter: blur(4px);
+    }
+    .ec-hero-bg {
+      position: absolute;
+      right: 0; top: 0;
+      height: 100%; width: 50%;
+      opacity: 0.2;
+      pointer-events: none;
+    }
+    .ec-hero-bg img {
+      object-fit: cover;
+      width: 100%; height: 100%;
+    }
+    .ec-section-hd {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+    .ec-section-hd h2 {
+      font-size: 24px;
+      line-height: 32px;
+      font-weight: 600;
+      margin: 0;
+    }
+    .ec-section-hd a {
+      color: var(--primary);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+    }
+    .ec-grid-4 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 768px) { .ec-grid-4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .ec-grid-4 { grid-template-columns: repeat(4, 1fr); } }
+    .ec-card {
+      background: var(--surface-container-lowest);
+      padding: 24px;
+      border-radius: 0.75rem;
+      border: 1px solid var(--outline-variant);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .ec-card:hover {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      border-color: var(--primary);
+      transform: translateY(-8px);
+    }
+    .ec-card-icon {
+      width: 48px; height: 48px;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      transition: transform 0.3s ease;
+    }
+    .ec-card:hover .ec-card-icon {
+      transform: scale(1.1);
+    }
+    .ec-card h3 {
+      font-size: 20px;
+      line-height: 28px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+    .ec-card p {
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--on-surface-variant);
+      margin: 0 0 16px 0;
+    }
+
+    .ec-bento {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 1024px) {
+      .ec-bento { grid-template-columns: 8fr 4fr; }
+    }
+    .ec-bento-main {
+      background: var(--surface-container-lowest);
+      border: 1px solid var(--outline-variant);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      position: relative;
+    }
+    .ec-bento-content {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    @media (min-width: 768px) {
+      .ec-bento-content { width: 50%; }
+    }
+    .ec-bento-content .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: color-mix(in srgb, var(--primary) 10%, transparent);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 9999px;
+      width: fit-content;
+      margin-bottom: 16px;
+    }
+    .ec-bento-content h2 {
+      font-size: 24px;
+      line-height: 32px;
+      font-weight: 600;
+      margin: 0 0 16px 0;
+    }
+    .ec-bento-content p {
+      font-size: 16px;
+      line-height: 24px;
+      color: var(--on-surface-variant);
+      margin: 0 0 24px 0;
+    }
+    .ec-bento-content .link {
+      color: var(--primary);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ec-bento-img {
+      background: var(--surface-container-low);
+      min-height: 16rem;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      .ec-bento-img { width: 50%; }
+    }
+    .ec-bento-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .ec-mob-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--surface-container-lowest), transparent);
+    }
+    @media (min-width: 768px) {
+      .ec-mob-gradient { display: none; }
+    }
+    .ec-carousel-track {
+      display: flex;
+      transition: transform 0.5s ease;
+      width: 100%;
+    }
+    .ec-bento-slide {
+      flex: 0 0 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    @media (min-width: 768px) {
+      .ec-bento-slide { flex-direction: row; }
+    }
+    .ec-img-wrapper {
+      width: 100%; height: 100%;
+      overflow: hidden;
+    }
+    .ec-zoom-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .ec-carousel-dots {
+      position: absolute;
+      bottom: 32px;
+      left: 32px;
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .ec-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      border: none;
+      background: var(--outline-variant);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+    }
+    .ec-dot.active {
+      background: var(--primary);
+      width: 10px; height: 10px;
+    }
+    .ec-bento-side {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .ec-testimonial {
+      background: var(--surface-container-lowest);
+      border-left: 4px solid var(--secondary);
+      padding: 24px;
+      border-radius: 0 0.75rem 0.75rem 0;
+    }
+    .ec-testimonial h4 {
+      font-size: 20px;
+      line-height: 28px;
+      font-weight: 600;
+      color: var(--primary);
+      margin: 0 0 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ec-testimonial p {
+      font-size: 14px;
+      line-height: 20px;
+      margin: 0;
+    }
+    .ec-testimonial cite {
+      font-size: 12px;
+      margin-top: 8px;
+      font-weight: 700;
+      opacity: 0.6;
+      display: block;
+      font-style: normal;
+    }
+    .ec-support {
+      background: var(--primary);
+      border: 1px solid var(--primary);
+      padding: 24px;
+      border-radius: 0.75rem;
+      color: #fff;
+    }
+    .ec-support h4 {
+      font-size: 20px;
+      line-height: 28px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+    .ec-support p {
+      font-size: 14px;
+      line-height: 20px;
+      opacity: 0.9;
+      margin: 0 0 16px 0;
+    }
+    .ec-support a {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+    .ec-resources {
+      background: var(--surface-container-low);
+      border-radius: 0.75rem;
+      padding: 32px;
+    }
+    .ec-resources h3 {
+      font-size: 24px;
+      line-height: 32px;
+      font-weight: 600;
+      margin: 0 0 32px 0;
+    }
+    .ec-res-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    @media (min-width: 768px) {
+      .ec-res-grid { flex-direction: row; }
+      .ec-res-item { flex: 1; }
+    }
+    .ec-res-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .ec-res-item .icon {
+      font-size: 36px;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+    .ec-res-item h4 {
+      font-size: 20px;
+      line-height: 28px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+    .ec-res-item p {
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--on-surface-variant);
+      margin: 0 0 16px 0;
+    }
+    .ec-res-item a {
+      color: var(--primary);
+      font-weight: 500;
+      font-size: 14px;
+    }
+    .ec-res-divider {
+      border: none;
+      border-top: 1px solid var(--outline-variant);
+      margin: 0;
+    }
+    @media (min-width: 768px) {
+      .ec-res-divider { display: none; }
+      .ec-res-border { border-left: 1px solid var(--outline-variant); padding-left: 32px; }
+    }
+    .mt-16 { margin-top: 64px; }
+    .mb-16 { margin-bottom: 64px; }
+    .ec-sect + .ec-sect { margin-top: 64px; }
+
+    [data-md-color-scheme="slate"] {
+      --on-surface: #e3e3e3;
+      --on-surface-variant: #b0b0b0;
+      --surface-container-lowest: #1e1e1e;
+      --surface-container-low: #2a2a2a;
+      --outline-variant: #3e3e3e;
+      --primary: #a6c1ff;
+      --primary-container: #0040a2;
+    }
+    [data-md-color-scheme="slate"] .ec-support {
+      background: #0040a2;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <!-- Hero Section: 打造您的品牌官網 -->
+  <section class="ec-sect" style="padding-top: 32px;">
+    <div class="ec-hero">
+      <div style="position: relative; z-index: 1; max-width: 42rem;">
+        <h1>打造您的品牌官網</h1>
+        <p>從零開始建立獨一無二的品牌形象，透過直覺的編輯工具與強大的後台管理，讓您的生意在線上發光發熱。</p>
+        <div class="ec-hero-actions">
+          <button class="btn-primary"><span class="material-symbols-outlined">add_business</span> 開始架站</button>
+          <button class="btn-secondary"><span class="material-symbols-outlined">play_circle</span> 觀看導覽</button>
+        </div>
+      </div>
+      <div class="ec-hero-bg">
+        <img alt="Abstract visualization of a website architecture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANR9wzR4fPXK8KS7n0gR-verAIS8tmKWF8c-KALtBxHmEkVxjia9BKo6BkV-ko9ayO8Wusn4c_1IXSYTfP-In_13pUFoeetnrskVQZO0YkX3tjhkrIwvqVSkeE1TxbpvZkR8dklOoX12i6xYaPU0xd2VUvbQmGQ0aYK5QDdhaA6TaEmzujX-eXrTP1iOz-r1Z3dyZhG5YGSxn6QqYw4L-vSbsKrTxi8kPQZO5OYbgZyWKuhI-GM2uVh6vdiWjhCDwoZ-gG5ybIj64">
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Cards Section: 核心功能導覽 -->
+  <section class="ec-sect">
+    <div class="ec-section-hd">
+      <h2>核心功能導覽</h2>
+      <a href="#">查看所有功能 <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span></a>
+    </div>
+    <div class="ec-grid-4">
+      <div class="ec-card card-shadow">
+        <div class="ec-card-icon" style="background: color-mix(in srgb, var(--primary) 10%, transparent); color: var(--primary);">
+          <span class="material-symbols-outlined">edit_square</span>
+        </div>
+        <h3>頁面編輯器</h3>
+        <p>視覺化拖拉編輯，無需程式碼即可打造精美版面。</p>
+      </div>
+      <div class="ec-card card-shadow">
+        <div class="ec-card-icon" style="background: color-mix(in srgb, var(--primary) 10%, transparent); color: var(--primary);">
+          <span class="material-symbols-outlined">sync_alt</span>
+        </div>
+        <h3>金物流串接</h3>
+        <p>全面串接在地主流支付與物流系統，結帳更流暢。</p>
+      </div>
+      <div class="ec-card card-shadow">
+        <div class="ec-card-icon" style="background: color-mix(in srgb, var(--primary) 10%, transparent); color: var(--primary);">
+          <span class="material-symbols-outlined">search_check</span>
+        </div>
+        <h3>SEO 優化</h3>
+        <p>內建 SEO 診斷工具，讓您的品牌更容易被搜尋到。</p>
+      </div>
+      <div class="ec-card card-shadow">
+        <div class="ec-card-icon" style="background: color-mix(in srgb, var(--primary) 10%, transparent); color: var(--primary);">
+          <span class="material-symbols-outlined">language</span>
+        </div>
+        <h3>自訂網域</h3>
+        <p>連結自有網域，強化品牌識別度與專業感。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bento Section: Feature Carousel + 商家成功案例 + 需要技術支援 -->
+  <section class="ec-sect">
+    <div class="ec-bento">
+      <div class="ec-bento-main card-shadow">
+        <div class="ec-carousel-track" id="feature-track">
+          <!-- Slide 1: 進階樣式設定 -->
+          <div class="ec-bento-slide">
+            <div class="ec-bento-content">
+              <span class="badge">NEW UPDATE</span>
+              <h2>進階樣式設定</h2>
+              <p>透過 CSS 客製化與細部樣式微調，滿足您對品牌視覺的極致要求。包含字體間距、動態效果與自定義區塊。</p>
+              <span class="link">立即了解 <span class="material-symbols-outlined">east</span></span>
+            </div>
+            <div class="ec-bento-img">
+              <div class="ec-img-wrapper">
+                <img class="ec-zoom-img" alt="進階樣式設定" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCynCUE8F-3Z7pYhNN6T4NBEBayySA6yhR8grssVA0huAliyvAFtXnau7oZ1VqvV9fG9tgWx9YQ6RA5jcdro208UuFViWx0aVy3AQrAz25ZFuRwAxB_kBmByCw1751VmGkbxa8lMW9DPVbYr5S96pJZOkiP-kDjLmG7j_Jc09LlQA-1ulOAp2qtX0tv2pYJ1ckyzix2-3p14RbO15AyOooEN-pyE77c1Zg65uTgG7gGAxxfBNR94-AFQqV838GmZxDEXZXOKGGzfaI">
+              </div>
+              <div class="ec-mob-gradient"></div>
+            </div>
+          </div>
+          <!-- Slide 2: 數據分析與報表 -->
+          <div class="ec-bento-slide">
+            <div class="ec-bento-content">
+              <span class="badge">FEATURE</span>
+              <h2>數據分析與報表</h2>
+              <p>串接 GA4 深度追蹤顧客行為，掌握銷售趨勢與會員洞察，以數據驅動精準決策。</p>
+              <span class="link">深入瞭解 <span class="material-symbols-outlined">east</span></span>
+            </div>
+            <div class="ec-bento-img">
+              <div class="ec-img-wrapper">
+                <img class="ec-zoom-img" alt="數據分析與報表" src="https://lh3.googleusercontent.com/aida/ADBb0uhzoipV1mqryILDes7AfQG_KK5yJp3QG7edluag4gFtyPz2YDTSutQNPH9CbbmelvAHNcQ42-m_m1s5rs5PuowhSC1uFo-y77Swz3FRBaL_n9ono__Y84OhhSnHEK4f1IhmzA8NbJZRSrpVnSa0B1JyookOfN95sWEhOhnKf5l0rmRRmndjojnkkJ4BgHvYus_1IXZTPK8M62hCWZf6JXn2X3jFo2fig3It357WzicUWJR2qjwiBKofDA">
+              </div>
+              <div class="ec-mob-gradient"></div>
+            </div>
+          </div>
+          <!-- Slide 3: 多國語言與跨境 -->
+          <div class="ec-bento-slide">
+            <div class="ec-bento-content">
+              <span class="badge">FEATURE</span>
+              <h2>多國語言與跨境</h2>
+              <p>快速建立多語系官網、支援多幣別結帳，串接跨境金物流，將生意拓展至全球市場。</p>
+              <span class="link">查看指南 <span class="material-symbols-outlined">east</span></span>
+            </div>
+            <div class="ec-bento-img">
+              <div class="ec-img-wrapper">
+                <img class="ec-zoom-img" alt="多國語言與跨境" src="https://lh3.googleusercontent.com/aida/ADBb0uggJNxb9hl0g_lvlnAabWjGVS-dmbn3IbI7PSMfuoAXkODCtmrRyHIoFhsAHshsLh-MYSxRSOQTv54Tneh_HwtnfhKaoZTSCwznuh4trslD7bXdGIhrk37aFOFy0QG6RYURyu1lcFy6ecGWnIJns6pLTpHdIos6o3eIYljhkaUvGlTEIdzIwnYfBqs9bHU795aXNTrfQclR6ksS5k76ysVoNDQLG3EZ0a2KXfL6qR6qUf-kjnXuDAnjj0o">
+              </div>
+              <div class="ec-mob-gradient"></div>
+            </div>
+          </div>
+          <!-- Slide 4: 自動化行銷 -->
+          <div class="ec-bento-slide">
+            <div class="ec-bento-content">
+              <span class="badge">FEATURE</span>
+              <h2>自動化行銷</h2>
+              <p>設定分眾推播與自動化行銷流程，精準觸發 Email、簡訊與 LINE 訊息，有效提升回購率。</p>
+              <span class="link">開始設定 <span class="material-symbols-outlined">east</span></span>
+            </div>
+            <div class="ec-bento-img">
+              <div class="ec-img-wrapper">
+                <img class="ec-zoom-img" alt="自動化行銷" src="https://lh3.googleusercontent.com/aida/ADBb0uhzoipV1mqryILDes7AfQG_KK5yJp3QG7edluag4gFtyPz2YDTSutQNPH9CbbmelvAHNcQ42-m_m1s5rs5PuowhSC1uFo-y77Swz3FRBaL_n9ono__Y84OhhSnHEK4f1IhmzA8NbJZRSrpVnSa0B1JyookOfN95sWEhOhnKf5l0rmRRmndjojnkkJ4BgHvYus_1IXZTPK8M62hCWZf6JXn2X3jFo2fig3It357WzicUWJR2qjwiBKofDA">
+              </div>
+              <div class="ec-mob-gradient"></div>
+            </div>
+          </div>
+          <!-- Slide 5: 會員分級經營 -->
+          <div class="ec-bento-slide">
+            <div class="ec-bento-content">
+              <span class="badge">FEATURE</span>
+              <h2>會員分級經營</h2>
+              <p>建立 VIP 分級制度與專屬權益，設定會員標籤與精準行銷，有效提升顧客忠誠度與回購率。</p>
+              <span class="link">深入瞭解 <span class="material-symbols-outlined">east</span></span>
+            </div>
+            <div class="ec-bento-img">
+              <div class="ec-img-wrapper">
+                <img class="ec-zoom-img" alt="會員分級經營" src="https://lh3.googleusercontent.com/aida/ADBb0uhzoipV1mqryILDes7AfQG_KK5yJp3QG7edluag4gFtyPz2YDTSutQNPH9CbbmelvAHNcQ42-m_m1s5rs5PuowhSC1uFo-y77Swz3FRBaL_n9ono__Y84OhhSnHEK4f1IhmzA8NbJZRSrpVnSa0B1JyookOfN95sWEhOhnKf5l0rmRRmndjojnkkJ4BgHvYus_1IXZTPK8M62hCWZf6JXn2X3jFo2fig3It357WzicUWJR2qjwiBKofDA">
+              </div>
+              <div class="ec-mob-gradient"></div>
+            </div>
+          </div>
+          <!-- Slide 6: 一鍵搬站 -->
+          <div class="ec-bento-slide">
+            <div class="ec-bento-content">
+              <span class="badge">FEATURE</span>
+              <h2>一鍵搬站</h2>
+              <p>從其他平台無痛轉移網站內容，完整保留資料與 SEO 排名，快速遷移至 CYBERBIZ。</p>
+              <span class="link">立即了解 <span class="material-symbols-outlined">east</span></span>
+            </div>
+            <div class="ec-bento-img">
+              <div class="ec-img-wrapper">
+                <img class="ec-zoom-img" alt="一鍵搬站" src="https://lh3.googleusercontent.com/aida/ADBb0uhzoipV1mqryILDes7AfQG_KK5yJp3QG7edluag4gFtyPz2YDTSutQNPH9CbbmelvAHNcQ42-m_m1s5rs5PuowhSC1uFo-y77Swz3FRBaL_n9ono__Y84OhhSnHEK4f1IhmzA8NbJZRSrpVnSa0B1JyookOfN95sWEhOhnKf5l0rmRRmndjojnkkJ4BgHvYus_1IXZTPK8M62hCWZf6JXn2X3jFo2fig3It357WzicUWJR2qjwiBKofDA">
+              </div>
+              <div class="ec-mob-gradient"></div>
+            </div>
+          </div>
+        </div>
+        <div class="ec-carousel-dots" id="feature-dots">
+          <button class="ec-dot active" data-index="0" aria-label="第 1 張"></button>
+          <button class="ec-dot" data-index="1" aria-label="第 2 張"></button>
+          <button class="ec-dot" data-index="2" aria-label="第 3 張"></button>
+          <button class="ec-dot" data-index="3" aria-label="第 4 張"></button>
+          <button class="ec-dot" data-index="4" aria-label="第 5 張"></button>
+          <button class="ec-dot" data-index="5" aria-label="第 6 張"></button>
+        </div>
+      </div>
+      <div class="ec-bento-side">
+        <div class="ec-testimonial">
+          <h4><span class="material-symbols-outlined">verified</span> 商家成功案例</h4>
+          <p>"轉換率在改版後提升了 25%，Zensical 的編輯器真的很好上手！"</p>
+          <cite>— 咖啡職人創辦人</cite>
+        </div>
+        <div class="ec-support">
+          <h4>需要技術支援？</h4>
+          <p>我們的工程團隊提供 24/7 的技術諮詢，隨時協助您解決架站難題。</p>
+          <a href="#">聯絡我們</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resource Links Section: 延伸資源 -->
+  <section class="ec-sect mb-16">
+    <div class="ec-resources">
+      <h3>延伸資源</h3>
+      <div class="ec-res-grid">
+        <div class="ec-res-item">
+          <span class="material-symbols-outlined icon">palette</span>
+          <h4>佈景主題庫</h4>
+          <p>數百款為電商量身打造的專業主題，一鍵套用。</p>
+          <a href="#">瀏覽主題庫</a>
+        </div>
+        <hr class="ec-res-divider">
+        <div class="ec-res-item ec-res-border">
+          <span class="material-symbols-outlined icon">extension</span>
+          <h4>外掛程式管理</h4>
+          <p>擴充您的商店功能，從行銷工具到客戶服務。</p>
+          <a href="#">管理外掛</a>
+        </div>
+        <hr class="ec-res-divider">
+        <div class="ec-res-item ec-res-border">
+          <span class="material-symbols-outlined icon">translate</span>
+          <h4>多語系設定</h4>
+          <p>邁向全球化經營，快速建立多語系與幣別支援。</p>
+          <a href="#">設定教學</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function() {
+      var track = document.getElementById('feature-track');
+      var slides = track.querySelectorAll('.ec-bento-slide');
+      var dots = document.querySelectorAll('#feature-dots .ec-dot');
+      var bento = track.closest('.ec-bento-main');
+      var current = 0;
+      var timer = setInterval(autoNext, 5000);
+
+      function goTo(index) {
+        current = index;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        for (var i = 0; i < dots.length; i++) {
+          dots[i].classList.toggle('active', i === current);
+        }
+      }
+
+      function autoNext() {
+        goTo(current < slides.length - 1 ? current + 1 : 0);
+      }
+
+      function resetTimer() {
+        clearInterval(timer);
+        timer = setInterval(autoNext, 5000);
+      }
+
+      bento.addEventListener('mouseenter', function() {
+        clearInterval(timer);
+      });
+
+      bento.addEventListener('mouseleave', function() {
+        timer = setInterval(autoNext, 5000);
+      });
+
+      for (var i = 0; i < dots.length; i++) {
+        dots[i].addEventListener('click', function() {
+          goTo(parseInt(this.getAttribute('data-index')));
+          resetTimer();
+        });
+      }
+    })();
+  </script>
+{% endblock %}

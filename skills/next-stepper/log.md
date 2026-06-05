@@ -13,6 +13,7 @@ All notable changes to this skill will be documented in this file.
 | 2026-03-23 | 1.0.6 | Fix | 嚴格規範格式並禁止 Material icons。 | 在檔案開頭新增正確/錯誤格式範例對比，明確禁止使用 Material icons（`:material-xxx:`）、`*` 開頭、`**粗體**`、單行圖示+標題。 |
 | 2026-03-23 | 1.0.7 | Feature | 新增 @ 檔案引用輸入方式。 | 現在支援兩種輸入方式：1) @檔案路徑 的 ##章節名稱  2) 直接貼上文字。 |
 | 2026-03-26 | 1.0.8 | Feature | 為 GMC 文件更新 後續操作 grid cards：Google Ads 轉換追蹤、Google Analytics 追蹤。修正相對路徑。 | 完善 GMC 後續操作區塊。 |
+| 2026-05-13 | 1.0.9 | Fix | 保留原始章節標題，不強制改為「後續操作」；需要時保留原始內容於 grid cards 下方供對照。 | 用戶反饋：不應自動改寫 heading，應保留原有章節標題。 |
 
 > **Note:** Versions follow [Semantic Versioning](https://semver.org/): 
 > **Major** (breaking changes), **Minor** (new features), **Patch** (bug fixes).

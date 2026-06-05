@@ -6,6 +6,7 @@ All notable changes to this skill will be documented in this file.
 | :--- | :--- | :--- | :--- | :--- |
 | 2026-03-18 | 1.0.0 | Init | 初始技能建立。 | 建立基線。 |
 | 2026-03-18 | 1.0.1 | Feature | 新增 log.md 與 version 追蹤機制。建立新技能時自動產生 log.md，並於每次修改時更新版本號碼。 | 技能現在具備自我進化追蹤能力。 |
+| 2026-06-03 | 1.1.0 | Feature | 建立新技能時自動產生 troff 格式的 man page（`man/<skill-name>.1`），包含 NAME、SYNOPSIS、DESCRIPTION、EXAMPLES、FILES、NOTES 章節。同時更新目錄結構圖與 Anatomy of a Skill 範例。 | 新技能現在預設附帶 man page，可透過 `man <skill>` 查閱。 |
 
 > **Note:** Versions follow [Semantic Versioning](https://semver.org/): 
 > **Major** (breaking changes), **Minor** (new features), **Patch** (bug fixes).

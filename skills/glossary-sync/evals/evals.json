@@ -1,0 +1,43 @@
+{
+  "skill_name": "glossary-sync",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "glossary-sync sync",
+      "expected_output": "Full sync completed: includes/abbreviations.md entries converted to H3 glossary format in docs/resources/glossary.md, categorized into proper sections with English annotations and 參閱 links. abbreviations.md cleaned of English-only plan entries.",
+      "files": [],
+      "expectations": [
+        "glossary.md uses H3 headings (###) for every term entry, not definition lists",
+        "English acronyms/brand names have bold English annotation (**Stock Keeping Unit**), pure Chinese terms have no bold prefix",
+        "Entries are categorized under the correct H2 sections matching the skill's categorization reference",
+        "At least 3 sections have 參閱 links with relative doc paths",
+        "abbreviations.md has English-only plan entries removed (Regular Plans, PLUS Plans, Professional Plan, etc.)",
+        "At least one 參閱 link uses anchor syntax (#term) for cross-referencing another glossary term",
+        "Definitions are concise (1-2 sentences), not copied verbatim from abbreviations.md"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "glossary-sync cleanup --dry-run",
+      "expected_output": "Dry-run preview of abbreviations.md cleanup: lists which English-only plan entries would be removed without modifying the file.",
+      "files": [],
+      "expectations": [
+        "No files were modified (dry-run respected)",
+        "The output lists the English-only plan entries that would be removed (Regular Plans, PLUS Plans, Professional Plan, etc.)",
+        "The output confirms other abbreviation entries are preserved"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "glossary-sync check",
+      "expected_output": "Audit report comparing abbreviations.md vs glossary.md: lists missing entries in both directions and any definition differences.",
+      "files": [],
+      "expectations": [
+        "Reports terms in abbreviations.md that are missing from glossary.md",
+        "Reports terms in glossary.md that are missing from abbreviations.md",
+        "No files were modified (check is read-only)",
+        "Uses the correct file paths (includes/abbreviations.md, docs/resources/glossary.md)"
+      ]
+    }
+  ]
+}

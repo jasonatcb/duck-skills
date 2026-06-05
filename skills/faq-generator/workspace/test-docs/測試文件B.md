@@ -27,8 +27,10 @@ products: ["POS"]
 
 ??? quote "庫存警示通知會發送到哪裡？"
 
+    #### 庫存警示通知會發送到哪裡？ [](){ #faq-stock-alert-notification } { .hidden-header }
     系統會發送至管理員設定的 email 或手機簡訊。
 
 ??? quote "可以針對不同商品設定不同的警示數量嗎？"
 
+    #### 可以針對不同商品設定不同的警示數量嗎？ [](){ #faq-stock-alert-per-product } { .hidden-header }
     可以，您可以在商品管理中分別設定各商品的庫存警示數量。

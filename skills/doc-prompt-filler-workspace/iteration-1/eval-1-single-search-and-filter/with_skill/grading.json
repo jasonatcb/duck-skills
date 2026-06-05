@@ -1,0 +1,40 @@
+{
+  "expectations": [
+    {
+      "text": "Task has /admin/orders_v2 and 訂單搜尋與篩選",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "情境 set to single",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "category is search-and-filter",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "module is orders",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "檔案路徑: docs/orders/search-and-filter.md",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "Heading anchors use search-and-filter",
+      "passed": false,
+      "evidence": "Not found in output"
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 1,
+    "total": 6,
+    "pass_rate": 0.83
+  }
+}

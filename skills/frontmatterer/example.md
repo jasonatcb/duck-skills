@@ -166,6 +166,13 @@ search:
 icon: lucide/ticket-check
 hide: []
 ---
+
+## Icon Format
+
+Both formats are valid:
+- `lucide/package-x` (slash format)
+- `lucide-package-x` (hyphen format)
+---
 ```
 
 ## Notes

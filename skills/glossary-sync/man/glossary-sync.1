@@ -1,0 +1,130 @@
+.TH GLOSSARY-SYNC 1 "2026-06-01" "1.0.1" "Zensical Documentation Skills"
+.SH NAME
+glossary-sync \- maintain and synchronize abbreviations.md with glossary.md
+.SH SYNOPSIS
+.B glossary-sync
+.I command
+.RB [ options ]
+.SH DESCRIPTION
+.B glossary-sync
+is a skill that synchronizes
+.I includes/abbreviations.md
+(MkDocs abbreviation definitions) with
+.I docs/resources/glossary.md
+(the resource center glossary) for the zensical-zh-tw documentation project.
+.PP
+It converts abbreviation entries into SEO-optimized H3 heading format with
+concise definitions, English annotations (for acronyms only), and cross-reference
+links. It can also clean up abbreviations.md and audit inconsistencies between
+the two files.
+.SH COMMANDS
+.TP
+.B sync
+Full sync. Parses all entries from abbreviations.md, converts them to H3
+glossary format, categorizes into proper sections, adds cross-reference
+links, and cleans up English-only plan entries from abbreviations.md.
+.TP
+.B format
+Reformat only. Converts existing glossary.md content to H3 headings without
+pulling in new terms from abbreviations.md. Useful for upgrading the format
+of an already-complete glossary.
+.TP
+.B cleanup
+Clean abbreviations.md. Removes English-only subscription plan entries
+(Regular Plans, PLUS Plans, Professional Plan, etc.) from
+abbreviations.md while preserving all other entries.
+.TP
+.B check
+Audit and compare. Reports entries missing from glossary.md, entries
+missing from abbreviations.md, and definition differences between the
+two files. Read-only; does not modify any files.
+.TP
+.BI add " term"
+Add a new term to both files. Creates an abbreviation entry in
+abbreviations.md and a formatted H3 entry in the correct glossary
+section. If the term does not fit any existing section, you will
+be prompted to specify the section.
+.SH OPTIONS
+.TP
+.B \-\-dry\-run
+Preview all changes without modifying any files.
+.TP
+.B \-\-verbose
+Show detailed progress for each entry being processed.
+.TP
+.BI \-\-source " path"
+Path to the abbreviations file.
+Default: includes/abbreviations.md
+.TP
+.BI \-\-target " path"
+Path to the glossary file.
+Default: docs/resources/glossary.md
+.SH EXAMPLES
+.TP
+glossary-sync sync
+Perform a full sync of abbreviations to glossary.
+.TP
+glossary-sync sync \-\-dry\-run
+Preview what changes a full sync would make.
+.TP
+glossary-sync format \-\-target docs/resources/glossary.md
+Reformat the existing glossary without adding new terms.
+.TP
+glossary-sync cleanup \-\-source includes/abbreviations.md
+Remove English-only plan entries from abbreviations.md.
+.TP
+glossary-sync check
+Compare both files and report inconsistencies.
+.TP
+glossary-sync add "電子發票" \-\-verbose
+Add a new term with detailed progress output.
+.SH GLOSSARY FORMAT
+Every glossary entry uses H3 headings (never definition lists):
+.PP
+English acronyms:
+.IP
+.B "### SKU"
+.B "**Stock Keeping Unit（存貨單位）**，用於識別商品的唯一代碼或編號。"
+.B "\- **參閱**：[商品管理操作指南](../../resources/商品管理操作指南.md)"
+.PP
+Pure Chinese terms (no bold annotation):
+.IP
+.B "### 退貨期限"
+.B "商家規定顧客可申請退貨的最長時間範圍，自顧客收到商品起算。"
+.B "\- **參閱**：[訂單與物流操作指南](../../resources/訂單物流操作指南.md)"
+.SH SECTIONS
+.PP
+Terms are categorized into one of five H2 sections:
+.TP
+.B 商品
+Product display and basic product information.
+.TP
+.B 商品結構與規格
+Product structure, bundles, variants, and categories.
+.TP
+.B 訂單、付款與物流
+Order management, payment, and logistics.
+.TP
+.B 行銷與成長
+Marketing, analytics, advertising, and growth.
+.TP
+.B 平台、方案與其他
+Platform plans, business models, and miscellaneous.
+.SH FILES
+.TP
+.I includes/abbreviations.md
+MkDocs abbreviation definitions (source).
+.TP
+.I docs/resources/glossary.md
+Resource center glossary page (target).
+.SH SEE ALSO
+.BR frontmatterer (1),
+.BR permalink\-generator (1)
+.SH NOTES
+.PP
+Man pages follow the same convention as all Zensical documentation skills.
+Each skill stores its man page at
+.IR <skill-path>/man/<skill-name>.1 .
+Use
+.BR man (1)
+with the skill name to view a skill's documentation.

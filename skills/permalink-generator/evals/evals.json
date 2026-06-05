@@ -1,0 +1,45 @@
+{
+  "skill_name": "permalink-generator",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "幫我為這個文件產生 permalink: test-files/使用宅配通出貨.md",
+      "expected_output": "The file test-files/使用宅配通出貨.md gets a permalink field: https://help.cyberbiz.io/ec/orders/使用宅配通出貨",
+      "files": ["test-files/使用宅配通出貨.md"],
+      "expectations": [
+        "The permalink field is added to the frontmatter",
+        "The permalink value follows the pattern https://help.cyberbiz.io/ec/orders/使用宅配通出貨",
+        "The original file content outside frontmatter is preserved unchanged",
+        "The title field in frontmatter is not modified"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "請幫我檢查並更新這個文件的 permalink，它目前的值可能不正確: test-files/第三方支付訂單人工退款.md",
+      "expected_output": "The user is informed about the existing permalink (manual-refund-for-third-party-payments) vs the generated value, and asked for confirmation before overwriting",
+      "files": ["test-files/第三方支付訂單人工退款.md"],
+      "expectations": [
+        "The user is asked for confirmation before overwriting the existing permalink",
+        "The existing permalink value (manual-refund-for-third-party-payments) is shown to the user",
+        "The generated permalink value is shown to the user for comparison"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "幫我批次更新 test-files 目錄下所有缺少 permalink 的 .md 檔案，把它們的 permalink 補上。不需要處理已經有值的檔案。",
+      "expected_output": "Multiple files in test-files/ get their empty permalink fields filled with the correct generated values, and a summary report is provided",
+      "files": [
+        "test-files/使用宅配通出貨.md",
+        "test-files/使用新竹物流出貨.md",
+        "test-files/使用黑貓宅配出貨.md",
+        "test-files/第三方支付訂單人工退款.md"
+      ],
+      "expectations": [
+        "Files with empty permalink ('permalink: \"\"') are updated with the generated value",
+        "Files with a non-empty existing permalink value are skipped or flagged for review",
+        "Each updated file gets a correct value matching the pattern https://help.cyberbiz.io/ec/orders/{{title}}",
+        "A summary report is provided showing which files were updated and which were skipped"
+      ]
+    }
+  ]
+}

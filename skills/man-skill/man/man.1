@@ -1,0 +1,49 @@
+.TH MAN 1 "2026-06-01" "1.0.0" "Zensical Documentation Skills"
+.SH NAME
+man \- display man pages for Zensical documentation skills
+.SH SYNOPSIS
+.B man
+.I skill-name
+.SH DESCRIPTION
+.B man
+is a skill that displays manual pages for Zensical documentation skills.
+Each skill stores its man page at
+.IR ~/.config/opencode/skills/<skill>/man/<skill>.1 .
+.PP
+If the requested skill has no man page,
+.B man
+falls back to displaying the skill's
+.I SKILL.md
+file.
+.SH USAGE
+.TP
+.BI "man " skill-name
+Show the man page for the named skill.
+.PP
+Examples:
+.IP
+.B man glossary-sync
+.IP
+.B man frontmatterer
+.IP
+.B man man
+.SH MAN PAGE CONVENTION
+.PP
+Every skill can optionally include a man page in standard troff format
+using the man macro package. The file must be located at:
+.IP
+~/.config/opencode/skills/<skill>/man/<skill>.<section>
+.PP
+The default section is 1 (user commands). Section 7 (miscellaneous) may
+be used for skills that are not command-style.
+.SH FILES
+.TP
+.I ~/.config/opencode/skills/<skill>/man/<skill>.1
+Man page for the skill.
+.TP
+.I ~/.config/opencode/skills/<skill>/SKILL.md
+Fallback if no man page exists.
+.SH SEE ALSO
+.BR glossary-sync (1),
+.BR frontmatterer (1),
+.BR permalink\-generator (1)

@@ -49,7 +49,7 @@ permalink: { type: String, desc: "Slug for Zensical URL - leave empty until docu
 comments: { type: Boolean, default: false }
 search:
   exclude: { type: Boolean, default: false }
-icon: { type: String, desc: "Lucide icon (e.g., lucide/braces)" }
+icon: { type: String, desc: "Lucide icon (e.g., lucide/braces, lucide/package-x)" }
 hide: { type: Array, enum: ["navigation", "toc", "feedback"] desc: "Visual elements to hide on the page"
 ```
 
@@ -147,7 +147,7 @@ hide: { type: Array, enum: ["navigation", "toc", "feedback"] desc: "Visual eleme
 |`icon`|String|-|**Lucide 圖示**：格式如 `lucide/braces` 或 `lucide/book`。|
 ### 9. 格式規範 (Formatting Guidelines)
 
-- **英文術語空格處理**：在 `intents`, `features`, `tags` 等欄位中，若英文術語包含空格，應以底線 `_` 取代空格（例如：`LINE OA` 應寫為 `LINE_OA`, `Google Analytics` 應寫為 `Google_Analytics`）。這有助於搜尋引擎精準匹配與系統內部處理。
+- **英文術語空格處理**：在 `tags` 欄位中，請使用空格（例如：`Meta Ads`、`Facebook 整合`、`Google Analytics`）。在 `intents` 和 `features` 欄位中，可使用底線或中文描述。
 - **日期格式**：嚴格遵守 `YYYY-MM-DD HH:mm`。
 - **陣列語法**：即使只有一個項目，也建議使用條列式或 `[]` 語法。
 - **paths 格式**：使用「選單項目 > 子項目」格式（例如：`訂單 > 訂單報表匯出`、`會員 > 會員列表`）。

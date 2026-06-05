@@ -93,21 +93,24 @@ await chrome_devtools_take_screenshot({filePath: "截圖路徑"})
 **優先使用 ImageMagick（screenshotter-gif 技能）：**
 ```bash
 # 基本用法
-magick frame1.png frame2.png frame3.png -resize 1280x800 -delay 100 -loop 0 output.gif
+magick frame1.png frame2.png frame3.png -resize 1280x800 -delay 250 -loop 0 output.gif
 
 # 批次處理（前綴命名）
-magick screenshot-*.png -resize 1280x800 -delay 100 -loop 0 output.gif
+magick screenshot-*.png -resize 1280x800 -delay 250 -loop 0 output.gif
 ```
 
 **參數說明：**
-- `-delay 100`：每幀間隔 100 厘秒（1 秒）
+- `-delay 250`：每幀間隔 250 厘秒（2.5 秒，推薦用於教學文件）
 - `-resize 1280x800`：寬度 1280，高度自動
 - `-loop 0`：無限循環
 
 **執行流程：**
 1. 連續截圖時使用編號命名：`ec-功能-01.png`, `ec-功能-02.png`, `ec-功能-03.png`
-2. 使用 ffmpeg 合併為 GIF
-3. 在文檔中引用 GIF：`![說明](../../../assets/images/功能.gif){ .screenshot }`
+2. **（重要）檢查所有幀是否有 PII**
+3. **詢問用戶要模糊的內容**
+4. 調用 `screenshotter-blur` 模糊 PII
+5. 使用 magick 合併為 GIF
+6. 在文檔中引用 GIF：`![說明](../../../assets/images/功能.gif){ .screenshot }`
 
 **參數說明：**
 - `framerate 1`：每秒 1 幀（建議用於技術文件）
@@ -120,6 +123,15 @@ magick screenshot-*.png -resize 1280x800 -delay 100 -loop 0 output.gif
 - **避免來回捲動**：如果同一個畫面需要展示上半部和下半部，應該分成兩個獨立的截圖點，而非來回捲動
 - **不顯示捲動過程**：技術文件的 GIF 應該是靜態畫面之間的跳躍，而非動畫式的捲動
 - **範例**：建立帳戶流程只需 6 幀：(1) 帳戶頁面 → (2) 輸入帳戶名稱 → (3) 資源頁面 → (4) 輸入屬性名稱 → (5) 商家詳細資料 → (6) 業務目標
+
+**GIF 幀延遲參考：**
+
+| 延遲值 | 時間 | 用途 |
+|--------|------|------|
+| 150 | 1.5秒 | 快速過渡動畫 |
+| **250** | **2.5秒** | **教學文件（推薦）** |
+| 300 | 3秒 | 複雜步驟需要更多閱讀時間 |
+| 400 | 4秒 | 很複雜的流程 |
 
 ### 7. 存放位置
 

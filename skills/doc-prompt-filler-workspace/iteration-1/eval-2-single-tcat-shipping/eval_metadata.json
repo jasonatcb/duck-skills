@@ -1,0 +1,14 @@
+{
+  "eval_id": 2,
+  "eval_name": "single-tcat-shipping",
+  "prompt": "Read the doc-generator.md template at reference/prompts/doc-generator.md and fill in its variables with these values. Output the complete rendered prompt in a code block.\n\n- 情境: single\n- category: tcat-shipping\n- module: payments-and-logistics\n- 頁面: /admin/orders\n- 主題: 宅配通出貨流程\n- 特別要求: 只需要補操作步驟段落就好，其他部分不用",
+  "assertions": [
+    "Task description contains /admin/orders and 宅配通出貨流程",
+    "情境 is set to single",
+    "category is tcat-shipping",
+    "module is payments-and-logistics",
+    "檔案路徑 references docs/payments-and-logistics/tcat-shipping.md",
+    "Heading anchors use tcat-shipping as category",
+    "特別要求 is included in the prompt"
+  ]
+}

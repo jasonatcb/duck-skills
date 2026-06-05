@@ -52,11 +52,12 @@ When invoked with a file path:
 - **Essential content fields** - The following fields should NOT be left empty when the document has relevant content:
   - `intents` - User goals/intentions (e.g., 設定 GA4 站內搜尋追蹤)
   - `features` - System features mentioned (e.g., GA4 加強型評估)
+  - `difficulty` - Document difficulty level (enum: `beginner`, `intermediate`, `advanced`)
   - `prerequisites` - Required pre-reading or tasks
     - If referencing existing doc with specific heading: use wikilink format `"[[filename#標題]]"`
     - If referencing existing doc without specific heading: use wikilink format `"[[文件標題]]"`
     - **If no existing related doc**: use plain string (e.g., `- 需先完成 Google Ads 帳號註冊`)
-  - `related` - Related documentation (use wikilink format, MUST verify doc exists)
+  - `related` - Related documentation (use wikilink format `"[[filename]]"`, MUST verify doc exists)
   - `tags` - SEO keywords (use underscores for multi-word terms)
   - `paths` - Navigation path mentioned in document body. For external services (e.g., GA4), include the service name as prefix (e.g., "GA4 後台 > 管理 > 資源設定"). For CYBERBIZ admin, use "選單項目 > 子項目" format.
 - **status field** - Leave as empty string `""` unless explicitly told to set a value

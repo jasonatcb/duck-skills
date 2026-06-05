@@ -26,4 +26,5 @@ products: ["EC"]
 
 ??? quote "這是問題"
 
+    #### 這是問題 [](){ #faq-sample-question } { .hidden-header }
     這是答案

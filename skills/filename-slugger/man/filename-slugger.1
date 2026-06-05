@@ -1,0 +1,118 @@
+.TH FILENAME-SLUGGER 1 "2026-06-03" "1.0.0" "Zensical Documentation Skills"
+.SH NAME
+filename-slugger \- convert Chinese filenames to English kebab-case and update references
+.SH SYNOPSIS
+.B filename-slugger
+.I command
+.RB [ options ]
+.SH DESCRIPTION
+.B filename-slugger
+converts Chinese-named Zensical documentation files (.md) to English
+kebab-case filenames, automatically updating all internal references.
+.PP
+Zensical auto-generates URL slugs from filenames. Chinese filenames produce
+URL-encoded, unreadable slugs. English kebab-case filenames produce clean,
+readable, SEO-friendly URLs. However, renaming files without updating
+cross-references will break wikilinks, markdown links, navigation entries,
+and frontmatter permalinks. This script handles all of that.
+.SH COMMANDS
+.TP
+.B rename
+Rename a single file and update all references. This is the primary
+command. It renames the file on disk and searches the entire project
+for wikilinks ([[old-name]]), markdown links (](old-name.md)),
+zensical.toml nav paths, and the file's own permalink frontmatter.
+.TP
+.B check
+Dry-run mode. Preview all changes that would be made without modifying
+any files. Always run this before rename to verify the changes.
+.TP
+.B scan
+List all Chinese-named .md files in the project. Shows each file's
+relative path and whether it has a permalink set. Useful for discovery
+before deciding which files to convert.
+.SH OPTIONS
+.TP
+.B \-\-dry\-run, \-n
+Preview all changes without modifying any files.
+.TP
+.B \-\-verbose, \-v
+Show detailed progress for each reference being updated.
+.TP
+.B \-\-no\-nav
+Skip updating zensical.toml and zensical.en.toml nav paths.
+.TP
+.B \-\-no\-links
+Skip updating wikilinks and markdown links. Only renames the file
+and updates the frontmatter permalink.
+.TP
+.B \-\-force, \-f
+Skip confirmation prompts. Useful in scripts or batch operations.
+.TP
+.B \-\-project\-root DIR
+Explicit project root directory. Auto-detected if omitted by looking
+for zensical.toml in parent directories of the old file path.
+.SH ARGUMENTS
+.TP
+.I old-path
+Path to the Chinese-named .md file, e.g.
+.RI "docs/ec/orders/\"訂單出貨流程.md\"" .
+.TP
+.I new-name
+Desired English kebab-case name. The .md extension is optional.
+Example:
+.RI "order-shipping-flow" .
+.SH EXAMPLES
+.TP
+filename-slugger scan
+List all Chinese-named files in the project.
+.TP
+filename-slugger check docs/ec/orders/訂單出貨流程.md order-shipping-flow
+Preview changes for renaming one file.
+.TP
+filename-slugger check docs/ec/orders/訂單出貨流程.md order-shipping-flow \-v
+Same, with detailed reference breakdown.
+.TP
+filename-slugger rename docs/ec/orders/訂單出貨流程.md order-shipping-flow
+Execute the rename with all reference updates.
+.TP
+filename-slugger rename docs/ec/orders/訂單出貨流程.md order-shipping-flow \-\-no-nav
+Rename and update links, but skip zensical.toml nav updates.
+.TP
+python3 rename_slug.py rename docs/ec/products/設定商品自訂分類群組.md custom-product-groupings \-\-project\-root /path/to/project
+Run with explicit project root.
+.SH SLUG CONVENTION
+Follow existing project patterns:
+.PP
+Correct:
+.IP \(bu
+All lowercase: order-shipping-flow
+.IP \(bu
+Kebab-case hyphens: edit-order-content
+.IP \(bu
+Start and end with letter/digit: cancel-order
+.IP \(bu
+Use standard terms: cvs, tcat, ecpay, b2c, c2c
+.PP
+Incorrect:
+.IP \(bu
+Underscores: order_shipping
+.IP \(bu
+CamelCase: orderShipping
+.IP \(bu
+Generic names: process, guide, flow
+.SH FILES
+.TP
+.I scripts/rename_slug.py
+Python script that performs the rename and reference updates.
+.SH SEE ALSO
+.BR permalink\-generator (1),
+.BR frontmatterer (1)
+.SH NOTES
+.PP
+Man pages follow the same convention as all Zensical documentation skills.
+Each skill stores its man page at
+.IR <skill-path>/man/<skill-name>.1 .
+Use
+.BR man (1)
+with the skill name to view a skill's documentation.

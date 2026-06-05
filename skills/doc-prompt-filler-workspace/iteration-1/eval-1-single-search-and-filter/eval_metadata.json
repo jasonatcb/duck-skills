@@ -1,0 +1,14 @@
+{
+  "eval_id": 1,
+  "eval_name": "single-search-and-filter",
+  "prompt": "Read the doc-generator.md template at reference/prompts/doc-generator.md and fill in its variables with these values. Output the complete rendered prompt in a code block.\n\n- 情境: single\n- category: search-and-filter\n- module: orders\n- 頁面: /admin/orders_v2\n- 主題: 訂單搜尋與篩選",
+  "assertions": [
+    "Task description contains /admin/orders_v2 and 訂單搜尋與篩選",
+    "情境 is set to single",
+    "category is search-and-filter",
+    "module is orders",
+    "檔案路徑 references docs/orders/search-and-filter.md",
+    "Heading anchors use search-and-filter as category (e.g., intro-search-and-filter)",
+    "File organization section references docs/orders/ path"
+  ]
+}

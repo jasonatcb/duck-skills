@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "情境 set to series",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "關聯文件 chain included",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "文件 A: cvs-pickup-setting",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "文件 A 頁面 /admin/logistics/cvs",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "文件 B: cvs-shipping",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "文件 C: delivery-status",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "All three file paths distinct",
+      "passed": true,
+      "evidence": "Found in output"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  }
+}

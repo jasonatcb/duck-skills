@@ -1,0 +1,78 @@
+{
+  "skill_name": "homepage-builder",
+  "evals": [
+    {
+      "id": 1,
+      "name": "create-resources-homepage",
+      "prompt": "Create a `homepage_resources.html` in `overrides/` that serves as a landing page for the CYBERBIZ 資源中心 (Resources Center). The page should have:\n\n1. A hero section with the title 「資源中心」and subtitle about accessing docs, FAQs, changelogs, and glossaries, with a search CTA button\n2. A 3-card grid highlighting the main resource categories: 常見問題 (FAQ), 更新紀錄 (Changelog), 詞彙表 (Glossary), each with Lucide icons\n3. A bento layout with a left carousel showcasing 文檔資源 (Documentation, API References, Video Tutorials) and a right sidebar with a 最新消息 (Latest News) panel and a 快速連結 (Quick Links) panel\n4. A 資源卡片 (Resource Cards) section at the bottom with 4 cards (開始使用指南, 最佳實踐, 影片教學, 技術白皮書) in a responsive grid\n\nFollow the exact same architecture as `homepage_ec.html`:\n- Extends `main.html`, NOT `base.html`\n- `{{ super() }}` in extrahead, NO `{{ super() }}` in content\n- Does NOT override scripts block\n- Uses `ec-` prefix for all classes\n- Material Symbols for icons\n- Responsive at 768px and 1024px\n- Dark mode via `[data-md-color-scheme=\"slate\"]`\n- No hardcoded `#fff` backgrounds\n- Section spacing via `.ec-sect + .ec-sect`\n- Carousel with auto-rotate and dot navigation\n\nRead `references/homepage_ec.html` for the complete pattern before writing.",
+      "files": [
+        {
+          "path": "references/homepage_ec.html",
+          "purpose": "Reference template to base the architecture on"
+        }
+      ],
+      "assertions": [
+        {
+          "name": "extends-main-html",
+          "description": "The template extends main.html, not base.html",
+          "assert": "contains-text:{% extends \"main.html\" %}"
+        },
+        {
+          "name": "extrahead-has-super",
+          "description": "extrahead block calls {{ super() }}",
+          "assert": "contains-text:{{ super() }} within {% block extrahead %}"
+        },
+        {
+          "name": "content-no-super",
+          "description": "content block does NOT call {{ super() }}",
+          "assert": "not-contains-text:{{ super() }} within {% block content %}"
+        },
+        {
+          "name": "scripts-not-overridden",
+          "description": "scripts block is NOT overridden",
+          "assert": "not-contains-text:{% block scripts %}"
+        },
+        {
+          "name": "dark-mode-block",
+          "description": "Dark mode override block exists",
+          "assert": "contains-text:[data-md-color-scheme=\"slate\"]"
+        },
+        {
+          "name": "responsive-768",
+          "description": "Responsive breakpoint at 768px",
+          "assert": "contains-text:@media (min-width: 768px)"
+        },
+        {
+          "name": "responsive-1024",
+          "description": "Responsive breakpoint at 1024px",
+          "assert": "contains-text:@media (min-width: 1024px)"
+        },
+        {
+          "name": "ec-prefix-classes",
+          "description": "Uses ec- prefixed CSS classes",
+          "assert": "contains-text:.ec-"
+        },
+        {
+          "name": "no-hardcoded-white",
+          "description": "No hardcoded #fff background values",
+          "assert": "not-contains-text:background: #fff"
+        },
+        {
+          "name": "material-symbols-loaded",
+          "description": "Material Symbols font is loaded",
+          "assert": "contains-text:Material+Symbols"
+        },
+        {
+          "name": "carousel-auto-rotate",
+          "description": "Carousel has auto-rotate via setInterval",
+          "assert": "contains-text:setInterval"
+        },
+        {
+          "name": "section-spacing-pattern",
+          "description": "Section spacing uses .ec-sect + .ec-sect pattern",
+          "assert": "contains-text:.ec-sect + .ec-sect"
+        }
+      ]
+    }
+  ]
+}

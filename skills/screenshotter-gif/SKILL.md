@@ -88,8 +88,58 @@ magick -resize 1280x800 -delay 100 -loop 0 -quality 85 \
 When screenshots are named with sequential prefixes (e.g., `screenshot-01.png`, `screenshot-02.png`):
 
 ```bash
-magick screenshot-*.png -resize 1280x800 -delay 100 -loop 0 output.gif
+magick screenshot-*.png -resize 1280x800 -delay 200 -loop 0 output.gif
 ```
+
+## GIF 製作流程（重要）
+
+### 建立 GIF 前必須執行的步驟
+
+**1. 檢查所有幀是否有 PII**
+```bash
+# 提取 GIF 所有幀為 PNG
+magick input.gif -coalesce frame-%d.png
+
+# 使用 pytesseract 檢查每幀是否有 PII
+python3 -c "
+from PIL import Image
+import pytesseract
+import os
+
+for f in sorted(os.listdir('.')):
+    if f.startswith('frame-') and f.endswith('.png'):
+        img = Image.open(f)
+        data = pytesseract.image_to_data(img, lang='chi_tra+eng', output_type=pytesseract.Output.DICT)
+        for i, text in enumerate(data['text']):
+            if text.strip() and ('@' in text or len(text) > 5):
+                print(f'{f}: {text} at x={data[\"left\"][i]}, y={data[\"top\"][i]}')
+"
+```
+
+**2. 詢問用戶要模糊的內容**
+```
+請問需要模糊哪些文字或區域？
+```
+
+**3. 調用 screenshotter-blur 模糊 PII**
+- 使用 OCR 偵測座標
+- 確認後執行模糊
+- 驗證模糊效果
+
+**4. 重新製作 GIF**
+```bash
+# 設定延遲為 250 厘秒（2.5 秒，推薦用於教學文件）
+magick frame-*.png -set delay 250 -loop 0 -resize 1280x800 output.gif
+```
+
+### 延遲參考
+
+| 延遲值 | 時間 | 用途 |
+|--------|------|------|
+| 150 | 1.5秒 | 快速過渡動畫 |
+| **250** | **2.5秒** | **教學文件（推薦）** |
+| 300 | 3秒 | 複雜步驟需要更多閱讀時間 |
+| 400 | 4秒 | 很複雜的流程 |
 
 ## GIF Optimization
 

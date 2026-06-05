@@ -1,0 +1,45 @@
+{
+  "expectations": [
+    {
+      "text": "Task has /admin/orders and 宅配通出貨流程",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "情境 set to single",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "category is tcat-shipping",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "module is payments-and-logistics",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "檔案路徑: docs/payments-and-logistics/tcat-shipping.md",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "Heading anchors use tcat-shipping",
+      "passed": true,
+      "evidence": "Found in output"
+    },
+    {
+      "text": "特別要求 included",
+      "passed": true,
+      "evidence": "Found in output"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 0,
+    "total": 7,
+    "pass_rate": 1.0
+  }
+}

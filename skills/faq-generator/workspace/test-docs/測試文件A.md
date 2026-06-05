@@ -29,12 +29,15 @@ products: ["EC"]
 
 ??? quote "支援哪些金流方式？"
 
+    #### 支援哪些金流方式？ [](){ #faq-payment-types } { .hidden-header }
     目前支援信用卡、超商代碼及 ATM 轉帳三種方式。
 
 ??? quote "如何啟用金流功能？"
 
+    #### 如何啟用金流功能？ [](){ #faq-enable-payment } { .hidden-header }
     請前往後台 > 金流設定，依序設定各項金流方式並啟用。
 
 ??? quote "金流設定需要審核嗎？"
 
+    #### 金流設定需要審核嗎？ [](){ #faq-payment-review } { .hidden-header }
     部分金流（如信用卡）需要通過審核流程才能正式啟用。

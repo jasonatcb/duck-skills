@@ -1,0 +1,15 @@
+{
+  "eval_id": 3,
+  "eval_name": "series-cvs-delivery",
+  "prompt": "Read the doc-generator.md template at reference/prompts/doc-generator.md and fill in its variables with these values. Output the complete rendered prompt in a code block.\n\n- 情境: series\n- 關聯文件: 超商取貨設定 → 超商出貨流程 → 配送狀態對照表\n- 文件 A: category=cvs-pickup-setting, module=payments-and-logistics, 頁面=/admin/logistics/cvs, 主題=設定超商取貨\n- 文件 B: category=cvs-shipping, module=payments-and-logistics, 頁面=/admin/orders_v2, 主題=超商出貨流程\n- 文件 C: category=delivery-status, module=payments-and-logistics, 主題=配送狀態對照表",
+  "assertions": [
+    "情境 is set to series",
+    "關聯文件 chain is included: 超商取貨設定 → 超商出貨流程 → 配送狀態對照表",
+    "文件 A: cvs-pickup-setting module payments-and-logistics 頁面 /admin/logistics/cvs",
+    "文件 A 檔案路徑: docs/payments-and-logistics/cvs-pickup-setting.md",
+    "文件 B: cvs-shipping module payments-and-logistics 頁面 /admin/orders_v2",
+    "文件 B 檔案路徑: docs/payments-and-logistics/cvs-shipping.md",
+    "文件 C: delivery-status module payments-and-logistics",
+    "All three documents have unique file paths defined"
+  ]
+}
